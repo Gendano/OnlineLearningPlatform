@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ShowLessonsViewModel>
+<h2>My Lessons</h2>
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Lesson Title</th>
+            <th>Lesson Description</th>
+            <th>Lesson Video</th>
+            <th>Module Title</th>
+            <th>Course Title</th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lesson in Model)
+        {
+            <tr>
+                <td>@lesson.Title</td>
+                <td>@lesson.Description</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(lesson.VideoPath))
+                    {
+                        <video width="200" controls>
+                            <source src="@Url.Content(lesson.VideoPath)" type=video/mp4 />
+                            
+                        </video>
+                    }
+                    else
+                    {
+                        <span>there is no video</span>
+                    }
+
+                </td>
+                <td>@lesson.ModuleTitle</td>
+                <td>@lesson.CourseTitle</td>
+                <td>
+                    <a asp-action="Edit"  asp-controller="CreateLessons" asp-route-Id="@lesson.Id" class="btn btn-primary">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

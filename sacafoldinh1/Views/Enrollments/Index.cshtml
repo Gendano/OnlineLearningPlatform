@@ -1,0 +1,56 @@
+﻿@model IEnumerable<sacafoldinh1.Models.Enrollment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnrollmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Progress)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnrollmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Progress)
+            </td>
+            <td>
+               
+
+
+                    @Html.ActionLink("Edit", "Edit", new { UserId = item.UserId, CourseId = item.CourseId }) |
+                    @Html.ActionLink("Details", "Details", new { UserId = item.UserId, CourseId = item.CourseId }) |
+                    @Html.ActionLink("Delete", "Delete", new { UserId = item.UserId, CourseId = item.CourseId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

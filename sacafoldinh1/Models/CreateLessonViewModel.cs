@@ -1,0 +1,13 @@
+﻿namespace sacafoldinh1.Models
+{
+    public class CreateLessonViewModel
+    {
+        public int ModuleId { get; set; }
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+        public string VideoPath { get; set; }
+        public IFormFile? VideoFile { get; set; }
+      
+    }
+}

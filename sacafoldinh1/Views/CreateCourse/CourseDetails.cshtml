@@ -1,0 +1,42 @@
+﻿@model sacafoldinh1.Models.CourseDetailsViewModel
+
+<h2>@Model.Title</h2>
+<p>@Model.Description</p>
+<h3>modeule and lessons </h3>
+@foreach(var module in Model.Modules)
+{
+    <div>
+        <h4>@module.Title</h4>
+        <ul>
+            @foreach(var lesson in module.Lessons)
+            {
+                <li>@lesson.Title</li>
+            }
+        </ul>
+    </div>
+}
+    <ul>
+
+    <h3> Exams </h3>
+    @foreach (var exam in Model.Exams)
+    {
+        
+            <h4>@exam.Title</h4>
+          
+    }
+
+    </ul>
+
+
+<h3> Assignments </h3>
+<ul>
+    @foreach (var assignment  in Model.Assignments)
+    {
+        <li>@assignment.Title</li>
+    }
+</ul>
+
+<h3>Actions</h3>
+<button onclick="openCreateLessonModel()"> create new lesson</button>
+<button onclick="openCreateExamModel()"> create new Exam</button>
+<button onclick="openCreateAssignmentModel()"> create new Assugnment</button>

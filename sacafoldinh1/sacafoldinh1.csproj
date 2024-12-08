@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-sacafoldinh1-d0a1ec93-1b01-4ccb-9785-1fc7c6f64b5b</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Courses\CreateExam.cshtml" />
+    <Content Remove="Views\Courses\MyLessons.cshtml" />
+    <Content Remove="Views\CreateCourse\CourseDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Profile\" />
+    <Folder Include="wwwroot\videos\" />
+    <Folder Include="wwwroot\ProfileImages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\CreateCourse\CourseDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Courses\CreateExam.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Courses\MyLessons.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\CreateCourse\CourseDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Courses\CreateExam.cshtml" />
+    <None Include="Views\Courses\MyLessons.cshtml" />
+    <None Include="Views\CreateCourse\CourseDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Courses\MyLessons.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Courses\CreateExam.cshtml" />
+  </ItemGroup>
+
+</Project>

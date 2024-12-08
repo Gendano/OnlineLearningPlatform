@@ -1,0 +1,151 @@
+﻿@model sacafoldinh1.Models.Course
+<h2>@Model.Title</h2>
+<p>@Model.Description</p>
+
+@foreach (var module in Model.Modules)
+      {
+    <div>
+        <h4>@module.Title</h4>
+        <ul>
+     @foreach (var lesson in module.Lessons)  
+     {   
+         <li>
+                   <a href="@Url.Action("LessonDetails","Courses",
+                    new{courseId = Model.Id ,
+                        moduleId = module.Id ,
+                        lessonId = lesson.Id})"  style="text-decoration:none; font-size:larger">
+                        @lesson.Title
+                        </a>
+             
+         </li> 
+     } 
+    
+     </ul>
+    </div>
+       }
+    <ul>
+    <h3> Assignments </h3>
+    @foreach (var assignment in Model.Assignments)
+    {
+        <li style="text-decoration:none; font-size:larger">@assignment.Title</li>
+    }
+   </ul>
+<h3> Exams </h3>
+@foreach (var exam in Model.Exams)
+{
+
+    <h4 style="text-decoration:none; font-size:larger">@exam.Title</h4>
+   
+   
+}
+    </ul>
+@if(User.IsInRole("Teacher"))
+    {
+<ul>
+   
+<h3>Actions</h3>
+    <button onclick="toggleContent('CreateLessonModel')" class="btn btn-primary"> create new lesson</button>
+    <button onclick="toggleContent('CreateAssignmentModal')" class="btn btn-primary"> create new Assignment</button>
+    <button onclick="toggleContent()" class="btn btn-primary"> create new Exam</button>
+        <a asp-action="CreateExam" asp-route-courseId="@Model.Id" class="btn btn-primary">Create exam now</a>
+</ul>
+    }
+    <!-- Create New Lesson -->
+
+<div id="CreateLessonModel" style="display:none"  >
+    <div class="row">
+        <div class="col-md-4">
+    <form asp-action="CreateLesson"  method="post" enctype="multipart/form-data"  >
+                <div class="form-group">
+                    <input type="hidden" name="courseId" value="@Model.Id"  />
+                    <label class="control-label">Lesson Title  </label>
+                    <input type="text" name="LessonTitle" required class="form-control" />
+        </div>
+                <div class="form-group">
+                    <label class="control-label">Lesson Description  </label>
+     <textarea name="LessonDetails"  class="form-control"></textarea>
+        </div>
+                <div class="form-group">
+                    <label class="control-label"> lesson Video</label>
+                    <input type="file" name="lessonVideo" required class="form-control" />
+        </div>
+                <div class="form-group">
+                    <label class="control-label"> Module</label>
+                    <select name="moduleId" class="form-control">            
+            @foreach(var module in Model.Modules)
+            {
+                <option value="@module.Id" >@module.Title</option>
+            }
+        </select>
+        
+        </div>
+        <br/>
+                <div class="form-group">
+                    <label class="control-label"> Add New Module</label>
+                    <input type="text" name="newModuleTitle" class="form-control">
+                    <label class="control-label">Lesson Description  </label>
+                    <textarea name="newMduleDescription"  class="form-control"></textarea>
+        </div>
+                <button type="submit" class="btn btn-primary"> save</button>
+    </form>
+        </div>
+            <script>
+                function toggleContent(CreateLessonModel)
+                {
+
+                    var content = document.getElementById(CreateLessonModel);
+                    if (content.style.display === "none" || content.style.display === "") {
+                        content.style.display = "block";
+
+                    }
+                    else {
+                        content.style.display = "none";
+                    }
+                }
+                
+            </script>
+        </div>
+    </div>
+   
+   
+    <!-- Create New Assignment -->
+        <div id="CreateAssignmentModal" style="display:none">
+           <div class="row">
+           <div class="col-md-4">
+            <form asp-action="CreateAssignment" method="post">
+                <div class="form-group">
+                    <input type="hidden" name="courseId" value="@Model.Id"  />
+                    <label class="control-label"> Assignment Title  </label>
+                    <input type="text" name="assignmentTitle" required class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Assignment Description</label>
+                    <input type="text" name="assignmentDescription" required class="form-control" />
+                </div>
+            <div class="form-group">
+                <label class="control-label"> DueDate </label>
+                <input type="datetime-local" name="dueDate" required class="form-control" />
+            </div>
+                <button type="submit" class="btn btn-primary"> save</button>
+        </form>
+    </div>
+   
+        <script>
+            function toggleContent(CreateAssignmentModal) {
+
+                var content = document.getElementById(CreateAssignmentModal);
+                if (content.style.display === "none" || content.style.display === "") {
+                    content.style.display = "block";
+
+                }
+                else {
+                    content.style.display = "none";
+                }
+            }
+        </script>
+    </div>
+    </div>
+    
+ 
+
+    

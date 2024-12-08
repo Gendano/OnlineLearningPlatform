@@ -1,0 +1,68 @@
+﻿@model ExamCreateViewModel
+<h2>Create New Exam</h2>
+<form asp-action="CreateExam" method="post">
+    <input type="hidden" asp-for="" />
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreatedDate"></label>
+        <input asp-for="CreatedDate" type="datetime-local" class="form-control" />
+    </div>
+
+
+    <h3>Questions</h3>
+    <div id="questions-container"></div>
+    <button type="button" class="btn btn-secondary" onclick="addQuestion()">Add Question</button>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<script>
+    let questionIndex = 0;
+
+    function addQuestion() {
+        const container = document.getElementById('questions-container');
+        const questionHtml = `
+                        <div class="question" data-index="${questionIndex}">
+                            <h4>New Question</h4>
+                            <input type="hidden" name="Questions.Index" value="${questionIndex}" />
+                            <div class="form-group">
+                                <label>Quetion Text</label>
+                                <input name="Questions[${questionIndex}].Text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Point</label>
+                                <input name="Questions[${questionIndex}].Score" type="number" class="form-control" />
+                            </div>
+                            <div id="answers-${questionIndex}" class="answers-container"></div>
+                            <button type="button" class="btn btn-secondary" onclick="addAnswer(${questionIndex})">إضافة إجابة</button>
+                        </div>
+                    `;
+        container.insertAdjacentHTML('beforeend', questionHtml);
+        questionIndex++;
+    }
+
+    function addAnswer(questionIndex) {
+        const answersContainer = document.getElementById(`answers-${questionIndex}`);
+        const answerIndex = answersContainer.childElementCount;
+        const answerHtml = `
+                        <div class="answer">
+                            <input type="hidden" name="Questions[${questionIndex}].Answers.Index" value="${answerIndex}" />
+                            <div class="form-group">
+                                    <label>Quetion Text</label>
+                                <input name="Questions[${questionIndex}].Answers[${answerIndex}].Text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input name="Questions[${questionIndex}].Answers[${answerIndex}].IsCorrect" type="checkbox" />
+                                    Corrct
+                                </label>
+                            </div>
+                        </div>
+                    `;
+        answersContainer.insertAdjacentHTML('beforeend', answerHtml);
+    }
+</script>

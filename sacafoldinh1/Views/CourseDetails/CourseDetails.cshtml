@@ -1,0 +1,48 @@
+﻿@model sacafoldinh1.Models.CourseDetailsViewModel
+
+<h2>@Model.CourseTitle</h2>
+<p>@Model.CourseDescription</p>
+<h3> Moduls </h3>
+@foreach( var module in Model.Modules)
+{
+      <div>
+        <h4>@module.ModuleTitle</h4>
+        <ul>
+            @foreach(var lesson in module.Lessons)
+            {
+                <li>@lesson.LessonTitle</li>
+            } 
+       </ul>
+     </div>
+}
+
+<h3>Exams</h3>
+@if (Model.Exams.Any())
+{
+    <ul>
+        @foreach(var exam in Model.Exams)
+        {
+            <li>@exam.ExamTitle</li>
+        }
+    </ul>
+
+}
+else
+{
+    <p>There is no eaxams yet!</p>
+}
+
+<h3> Assignments</h3>
+@if(Model.Assignments.Any())
+{
+    <ul>
+        @foreach(var assignments in Model.Assignments)
+        {
+            <li>@assignments.AssignmentTitle</li>
+        }
+    </ul>
+}
+else
+{
+    <p>There is no assignments yet!</p>
+}
